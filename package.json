@@ -1,0 +1,24 @@
+{
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongoose": "^6.8.0"
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "name": "thoughts_gram",
+  "description": "",
+  "version": "1.0.0",
+  "main": "server.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MKHLink/thoughts_gram.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MKHLink/thoughts_gram/issues"
+  },
+  "homepage": "https://github.com/MKHLink/thoughts_gram#readme"
+}
