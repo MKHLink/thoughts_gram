@@ -66,7 +66,7 @@ const thoughtController ={
             });
     },
 
-    deletThought({params},res){
+    deleteThought({params},res){
         Thought.findOneAndDelete({_id: params.thoughtId})
         .then(deletedThought=>{
             if(!deletedThought)
