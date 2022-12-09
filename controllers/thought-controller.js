@@ -7,7 +7,7 @@ const thoughtController ={
         .then(dbThoughtData =>res.json(dbThoughtData))
         .catch(err=>{
             console.log(err);
-            res.status(400).json(err);
+            res.status(500).json(err);
         });
     },
 
@@ -23,7 +23,7 @@ const thoughtController ={
         })
         .catch(err=>{
             console.log(err);
-            res.status(400).json(err);
+            res.status(500).json(err);
         });
     },
 
@@ -46,7 +46,7 @@ const thoughtController ={
             })
             .catch(err=>{
                 console.log(err);
-                res.status(400).json(err);
+                res.status(500).json(err);
             });
     },
 
@@ -62,7 +62,7 @@ const thoughtController ={
             })
             .catch(err=>{
                 console.log(err);
-                res.status(400).json(err);
+                res.status(500).json(err);
             });
     },
 
@@ -81,15 +81,14 @@ const thoughtController ={
             res.json(dbThoughtData);
         })
         .catch(err=>{
-            console.log(err);
-            res.status(400).json(err);
+            res.status(500).json(err);
         });
     },
 
-    deleteReaction({params},res){
+    deleteReaction(req,res){
         Thought.findOneAndUpdate(
-            {_id: params.thoughtId},
-            {$pull: {reactions: {reactionId : params.reactionId}}},
+            {_id: req.params.thoughtId},
+            {$pull: {reactions: {reactionId : req.params.reactionId}}},
             {new: true}
         )
         .then(dbThoughtData =>{
@@ -102,12 +101,12 @@ const thoughtController ={
         })
         .catch(err=>{
             console.log(err);
-            res.status(400).json(err);
+            res.status(500).json(err);
         });
     },
 
     deleteThought({params},res){
-        Thought.findOneAndDelete({_id: params.thoughtId})
+        Thought.findOneAndDelete({_id: params.id})
         .then(deletedThought=>{
             if(!deletedThought)
             {
@@ -119,19 +118,13 @@ const thoughtController ={
                 {thoughts: params.thoughtId},
                 {$pull: {thoughts: params.thoughtId}},
                 {new: true}
-            );
+            )
         })
-        .then(dbThoughtData =>{
-            if(!dbThoughtData)
-            {
-                res.status(404).json({message: 'No thought found with the id'});
-                return;
-            }
-            res.json(dbThoughtData);
+        .then(()=>{
+            res.json({message: "Thought deleted"});
         })
         .catch(err=>{
-            console.log(err);
-            res.status(400).json(err);
+            res.status(500).json(err);
         });
     }
 

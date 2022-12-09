@@ -19,7 +19,9 @@ router.route('/:id')
 router.route('/:userId').post(createThought);
 
 router.route('/:thoughtId/reactions')
-    .put(addReaction)
+    .put(addReaction);
+    
+router.route('/:thoughtId/reactions/:reactionId')
     .delete(deleteReaction);
 
 module.exports = router;
