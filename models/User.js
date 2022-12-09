@@ -1,5 +1,4 @@
 const {Schema, model} = require('mongoose');
-//import {isEmail} from 'validator';
 
 const UserSchema = new Schema({
     username: {
@@ -12,8 +11,11 @@ const UserSchema = new Schema({
     email: {
         type: String,
         required: true,
-        unique: true
-        //validate: [isEmail, 'invalid email']
+        unique: true,
+        match: [
+            "/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/",
+            "Must be a valid email address"
+        ]
     },
 
     friends: [
