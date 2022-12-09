@@ -49,6 +49,28 @@ const userController = {
         });
     },
 
+    addFriend(req,res){
+        User.findOneAndUpdate(
+            {_id: req.params.userId},
+            {$push: {friends: req.params.friendId}},
+            {new: true}
+        )
+        .then(dbUserData=>{
+            if(!dbUserData)
+            {
+                res.status(404).json({message: 'User not found'});
+                return;
+            }
+            res.json(dbUserData);
+        })
+        .catch(err=>{
+            console.log(err);
+            res.status(400).json(err);
+        });
+    },
+
+    removeFriend(){},
+
     deleteUser({params},res){
         User.findOneAndDelete({_id: params.id})
         .then(dbUserData=>{
