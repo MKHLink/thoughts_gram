@@ -2,6 +2,7 @@ const {User, Thought} = require('../models');
 
 const userController = {
 
+    //get all users
     getAllUsers(req,res){
         User.find({})
         .then(dbUserData => res.json(dbUserData))
@@ -11,6 +12,7 @@ const userController = {
         });
     },
 
+    //gets a single user by their id
     getUserById({params},res){
         User.findOne({_id: params.id})
         .then(dbUserData=>{
@@ -27,12 +29,14 @@ const userController = {
         });
     },
 
+    //creates a new user
     createUser({body},res){
         User.create(body)
         .then(dbUserData =>res.json(dbUserData))
         .catch(err=> res.status(400).json(err));
     },
 
+    //updates a user by their id
     updateUser({params,body}, res){
         User.findOneAndUpdate({_id: params.id},body,{new:true})
         .then(dbUserData=>{
@@ -49,6 +53,7 @@ const userController = {
         });
     },
 
+    //adds an exisiting user as a friend to another user
     addFriend(req,res){
         User.findOneAndUpdate(
             {_id: req.params.userId},
@@ -69,6 +74,7 @@ const userController = {
         });
     },
 
+    //deletes a user as a friend form their friends array
     removeFriend(req,res){
         User.findOneAndUpdate(
             {_id: req.params.userId},
@@ -89,6 +95,7 @@ const userController = {
         });
     },
 
+    //removes a user from the database
     deleteUser({params},res){
         User.findOneAndDelete({_id: params.id})
         .then(dbUserData=>{

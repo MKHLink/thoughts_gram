@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const apiRoutes = require('./api');
 
+//uses /api before all the endpoints
 router.use('/api',apiRoutes);
 
 router.use((req,res)=>{

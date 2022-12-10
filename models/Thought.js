@@ -1,4 +1,5 @@
 const {Schema, model, Types} = require('mongoose');
+//import of moment to format createdAt date value
 const moment = require('moment');
 
 const reactionSchema = new Schema({
@@ -58,6 +59,7 @@ const thoughtSchema = new Schema({
     }
 });
 
+//virtual to get a count of reactions in a thought
 thoughtSchema.virtual('reactionCount').get(function(){
     return this.reactions.length;
 });
